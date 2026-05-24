@@ -1,71 +1,111 @@
-#Movie Ticket Booking System Project (freeCodeCamp)
-'''
-This Project automates the ticket booking system
-from the initial eligibility check to membership verification
-and final price calculation after various charges and discount
-'''
+""" Movie Ticket Booking System (freeCodeCamp)
+
+This project handles:
+ - Eligibility Checking
+ - Membership Verification
+ - Ticket Pricing
+ - Service Charge Calculation
+"""
+
+# Utilize the sys.exit() function to intentionally terminate the Python script
+# Picked this up from CS50 Python course and wanted to try it
+import sys
+import random
 
 def main():
-    # line 10 - 15 are there to initialize the variables
-    base_price = 15
-    age = 21
-    is_member = False
-    is_weekend = False
-    seat_type = 'Gold'
-    show_time = 'Evening'
     
-    # line 18 - 21 ensure only eligible users book the ticket
-    if age > 17:
-        print('User is eligible to book a ticket')
-    else:
-        print('User is not eligible to book a ticket')
-    
-    # line 24 - 27 ensure eligible user could apply for their preferred show timing
-    if age >= 21:
-        print('User is eligible for Evening shows')
-    else:
-        print('User is not eligible for Evening shows')
-    
-    # line 30 - 36 ensure members can avail the membership discount
-    discount = 0
-    if is_member and age >= 21:
-        discount = 3
-        print('User qualifies for membership discount')
-    else:
-        print('User does not qualify for membership discount')
-    print('Discount:', discount)
-    
-    # line 39 - 45 calculate the extra charges for weekends and preferred show timings
-    extra_charges = 0
-    if is_weekend or show_time == 'Evening':
-        extra_charges = 2
-        print('Extra charges will be applied')
-    else:
-        print('No extra charges will be applied')
-    print('Extra charges:', extra_charges)
-    
-    # lines 48 re-checks the above conditions (gotta work on that)
-    if age >= 21 or age >= 17 and (show_time != 'Evening' or is_member):
-        print('Ticket booking condition satisfied')
+    print("------- Movie Ticket Booking System -------")
+    print()
 
-        # line 53 - 60 calculates the service charge
-        # based on the type of seat they want
-        service_charges = 0
-        if seat_type == 'Premium':
-            service_charges = 5
-        elif seat_type == 'Gold':
-            service_charges = 3
+    ## Login/Registration Phase ##
+    print("-------  1. Login  |  2. Register   -------")
+    ch = int(input("Enter your choice (1/2): "))
+
+    if ch == 1:
+        # Simulate the actual login process
+        # Using random name and age values for testing
+        username = input("Username: ")
+        password = input("Password: ")
+        confirmation = input("Login (Press Enter)")
+        if username and password:
+            name = random.choice(["Kai", "Gary", "Itachi", "Sasuke", "Ray"])
+            age = random.choice([18, 21, 26, 20, 22])
+            print(f"Login Successful. Welcome back, {name}!")
+            print()
         else:
-            service_charges = 1
-        print('Service charges:', service_charges)
-        
-        # Now, we calcualte and display the final price
-        final_price = base_price + extra_charges + service_charges - discount
-        print("Final price of ticket:",final_price)
-    
+            sys.exit("Login failed! Please enter both username and password.")
+
+    elif ch == 2:
+        # Simulate user registration
+        # Collect user information through input
+        name = input("Name: ")
+        age = int(input("Age: "))
+        username = input("Username: ")
+        password = input("Password: ")
+        confirmation = input("Register (Press Enter)")
+        if age < 18:
+            sys.exit('Sorry, you are not eligible to register due to age restrictions.')
+        else:
+            print(f"Registration Successful. Welcome, {name}!")
+            print()
     else:
-        # Give a message in case of any failure due to restrictions
-        print('Ticket booking failed due to restrictions')
+        sys.exit("Wrong Choice.")
+
+
+    ## Ticket Booking Phase ##
+    # base_price, is_weekend, and is_member are predefined values
+    base_price = 199
+    is_weekend = False
+    is_member = True
+
+    # Ask the user for their preferred seat type
+    # Apply service charges accordingly
+    print("Seat Type | Service Charge:")
+    print("1. Premium |  70")
+    print("2. Gold    |  40")
+    print("3. Regular |  10")
+    ch = int(input("Enter your preferred seat type (1/2/3): "))
+    if ch == 1: seat_type, service_charges = "Premium", 70
+    elif ch == 2: seat_type, service_charges = "Gold", 40
+    elif ch == 3: seat_type, service_charges = "Regular", 10
+    else: sys.exit("Wrong Choice.")
+
+    # Ask eligible users if they want the evening show
+    # Otherwise, randomly assign a morning or night show
+    if age >= 21:
+        print("You are eligible to apply for the Evening show.")
+        print("Do you wish to apply?")
+        ch = input("Enter your choice (yes/no): ")
+        if ch == 'yes':
+            show_time = 'Evening'
+        elif ch == 'no':
+            show_time = random.choice(["Morning", "Night"])
+        else:
+            sys.exit("Wrong Choice.")
+    else:
+        show_time = random.choice(["Morning", "Night"])
+    
+    # Apply membership discount to eligible users
+    if is_member:
+        print("A 15% membership discount has been applied.")
+        discount = 0.15 * base_price
+    else:
+        print("You do not qualify for the 15% membership discount.")
+        discount = 0
+    
+    # Calculate extra charges for timing and weekend
+    if is_weekend and show_time == 'Evening':
+        print("Extra charges will be applied.")
+        extra_charges = 0.075 * base_price
+    elif is_weekend or show_time == 'Evening':
+        print("Extra charges will be applied.")
+        extra_charges = 0.05 * base_price
+    else:
+        print("No extra charges will be applied.")
+        extra_charges = 0
+    
+    total_price = base_price + extra_charges + service_charges - discount
+    print(f"Ticket: {name} | {age} | {seat_type} | {show_time} | {round(total_price, 2)}")
 
 if __name__ == "__main__":
     main()
