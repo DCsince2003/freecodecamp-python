@@ -8,6 +8,10 @@ A curated collection of interesting Python exercises and projects from [freeCode
 > 🙋🏻 I choose the second one.
 
 ## Here's the list of projects:
-1. [Movie Ticket Booking System](https://github.com/DCsince2003/freecodecamp-python/blob/main/movie_ticket_booking_system.py) - Built using basic conditional logic to simulate a real-world booking workflow. The project focuses on program flow, decision-making, and input validation, with refinements to make the process more realistic and user-friendly.
+1. [Movie Ticket Booking System](https://github.com/DCsince2003/freecodecamp-python/blob/main/movie_ticket_booking_system.py) - 
+Built using basic conditional logic to simulate a real-world booking workflow🎟️🎬. The project focuses on program flow, decision-making, and input validation, with refinements to make the process more realistic and user-friendly.
 ![movie-ticket-booking-system-flowchart](/flowcharts/movie-tkt-system-flowchart.drawio.png)
 
+2. [Caesar Cipher Project](https://github.com/DCsince2003/freecodecamp-python/blob/main/caesar_cipher.py) - 
+Built using modular functions to perform 🤴Caesar Cipher 🔐encryption and 🔓decryption. The project focuses on structured program flow, function-based design, and string manipulation.
+![caesar-cipher-flowchart](/flowcharts/caesar-cipher-flowchart.drawio.png)
