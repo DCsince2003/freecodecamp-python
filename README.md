@@ -15,3 +15,7 @@ Built using basic conditional logic to simulate a real-world booking workflow�
 2. [Caesar Cipher Project](https://github.com/DCsince2003/freecodecamp-python/blob/main/caesar_cipher.py) - 
 Built using modular functions to perform 🤴Caesar Cipher 🔐encryption and 🔓decryption. The project focuses on structured program flow, function-based design, and string manipulation.
 ![caesar-cipher-flowchart](/flowcharts/caesar-cipher-flowchart.drawio.png)
+
+3. [Pin Extractor Project](https://github.com/DCsince2003/freecodecamp-python/blob/main/pin_extractor.py) - 
+Built using modular functions to process text input and extract 🔢PIN-like patterns or keywords from 📜pre-defined and user-input poems. The project emphasizes 🧩string handling, 📋list manipulation, and structured function-based program design.
+![pin-extractor-flowchart](/flowcharts/pin-extractor-flowchart.drawio.png)
