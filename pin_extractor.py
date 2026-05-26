@@ -1,4 +1,18 @@
+"""Pin Extractor Project (freeCodeCamp)
+
+Processes text input and extracts words or PIN-like patterns
+using string manipulation techniques.
+"""
+
 def pin_extractor(poems):
+    """
+    Extract secret codes from poems using the length of the nth word
+    in the nth line. If missing, use '0'.
+    Args:
+    poems (str): List of poems containing the secret codes
+    Returns:
+    secret_codes (list): List of secret codes from each poem
+    """
     secret_codes = []
     for poem in poems:
         secret_code = ''
