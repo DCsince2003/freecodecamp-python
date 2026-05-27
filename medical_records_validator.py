@@ -55,7 +55,7 @@ def validate(data):
     # Acquired data must be a sequence of each patient's medical record.
     is_sequence = isinstance(data, (list, tuple))
     if not is_sequence:
-        print('Invalid format: expected a list or tuple.')
+        print("Invalid format: expected a list or tuple of records.")
         return False
             
     is_invalid = False
@@ -66,28 +66,31 @@ def validate(data):
     # Loop through each patient record with its index
     for index, dictionary in enumerate(data):
         if not isinstance(dictionary, dict):
-            print(f"Invalid format: expected a dictionary at position {index}.")
+            print(f"Invalid format: Expected patient record {index + 1} to be a dictionary.")
+            print("Input Received: ", dictionary)
             is_invalid = True
             continue
 
         # Check if record has all required fields
-        if set(dictionary.keys()) != key_set:
-            print(
-                f"Invalid format: {dictionary} at position {index} has missing and/or invalid keys."
-            )
+        input_keys = set(dictionary.keys())
+        if input_keys != key_set:
+            print(f"Invalid format: Patient record {index + 1} has missing and/or invalid keys.")
+            print(f"Unexpected keys found: {input_keys - key_set}")
+            print(f"Missing fields: {key_set - input_keys}")
             is_invalid = True
             continue
 
-        # Find invalid fields in the record
+        # Find invalid fields in each record
         invalid_records = find_invalid_records(**dictionary)
         for key in invalid_records:
-            print(f"Unexpected format '{key}: {dictionary[key]}' at position {index}.")
+            print(f"Unexpected format '{key}: {dictionary[key]}' in patient record {index + 1}.")
             is_invalid = True
-        if is_invalid:
-            return False
+
+    if is_invalid:
+        return False
         
     # All records are valid
-    print('Valid format.')
+    print("All records are valid.")
     return True
 
 def main():    
