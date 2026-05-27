@@ -8,9 +8,7 @@ This project handles:
 
 import re
 
-def find_invalid_records(
-    patient_id, age, gender, diagnosis, medications, last_visit_id
-):
+def find_invalid_records(patient_id, age, gender, diagnosis, medications, last_visit_id):
     """Validate and identify invalid entries in the patient's medical record.
     Args:
         patient_id (str): Patient ID.
@@ -59,9 +57,7 @@ def validate(data):
         return False
             
     is_invalid = False
-    key_set = set(
-        ['patient_id', 'age', 'gender', 'diagnosis', 'medications', 'last_visit_id']
-    )
+    key_set = {'patient_id', 'age', 'gender', 'diagnosis', 'medications', 'last_visit_id'}
 
     # Loop through each patient record with its index
     for index, dictionary in enumerate(data):
@@ -69,15 +65,16 @@ def validate(data):
             print(f"Invalid format: Expected patient record {index + 1} to be a dictionary.")
             print("Input Received: ", dictionary)
             is_invalid = True
+            print()
             continue
 
         # Check if record has all required fields
         input_keys = set(dictionary.keys())
         if input_keys != key_set:
             print(f"Invalid format: Patient record {index + 1} has missing and/or invalid keys.")
-            print(f"Unexpected keys found: {input_keys - key_set}")
             print(f"Missing fields: {key_set - input_keys}")
             is_invalid = True
+            print()
             continue
 
         # Find invalid fields in each record
@@ -85,12 +82,12 @@ def validate(data):
         for key in invalid_records:
             print(f"Unexpected format '{key}: {dictionary[key]}' in patient record {index + 1}.")
             is_invalid = True
+        print()
 
     if is_invalid:
         return False
         
     # All records are valid
-    print("All records are valid.")
     return True
 
 def main():    
@@ -129,7 +126,15 @@ def main():
         }
     ]
     
-    validate(medical_records)
+    print("------------------------------------------")
+    print("|              PMR Validator             |")
+    print("------------------------------------------")
+    print()
+    if validate(medical_records):
+        print("All Records are valid.")
+    else:
+        print("Please review the errors above.")
+    print()
 
 if __name__ == "__main__":
     main()
