@@ -1,8 +1,35 @@
+"""Medical Records Validator Project (freeCodeCamp)
+
+This project handles:
+ - Validation of patient medical record input
+ - Verification of data types and format constraints using rules and regex
+ - Detection and reporting of invalid or inconsistent records with error details
+"""
+
 import re
 
 def find_invalid_records(
     patient_id, age, gender, diagnosis, medications, last_visit_id
 ):
+    """Validate and identify invalid entries in the patient's medical record.
+    Args:
+        patient_id (str): Patient ID.
+        age (int): Patient's age.
+        gender (str): Patient's gender.
+        diagnosis (str): Patient's diagnosed condition.
+        medications (list): List of prescribed medications.
+        last_visit_id (str): Patient's last visit ID.
+    Returns:
+        list: Keys of all invalid records.
+    """
+
+    # Each record must abide by the following rules:
+    # patient_id (str) should start with 'p' or 'P' followed by some number
+    # age (int) should be greater than or equal to 18
+    # gender (str) should be either male or female
+    # diagnosis (str or None)
+    # each element of medications (list) should be a string
+    # last_visit_id (str) should start with 'v' followed by some number
     constraints = {
         'patient_id': isinstance(patient_id, str)
         and re.fullmatch(r'p\d+', patient_id, re.IGNORECASE),
@@ -14,27 +41,36 @@ def find_invalid_records(
         'last_visit_id': isinstance(last_visit_id, str)
         and re.fullmatch(r'v\d+', last_visit_id, re.IGNORECASE)
     }
+    # return the keys of all invalid records
     return [key for key, value in constraints.items() if not value]
     
 def validate(data):
-    
-    is_sequence = isinstance(data, (list, tuple))
+    """Validates a sequence of medical records.
+    Args:
+        data (list or tuple): A sequence of medical records for validation
+    Returns:
+        bool: Whether the input was valid or not
+    """
 
+    # Acquired data must be a sequence of each patient's medical record.
+    is_sequence = isinstance(data, (list, tuple))
     if not is_sequence:
         print('Invalid format: expected a list or tuple.')
         return False
-        
+            
     is_invalid = False
     key_set = set(
         ['patient_id', 'age', 'gender', 'diagnosis', 'medications', 'last_visit_id']
     )
 
+    # Loop through each patient record with its index
     for index, dictionary in enumerate(data):
         if not isinstance(dictionary, dict):
             print(f"Invalid format: expected a dictionary at position {index}.")
             is_invalid = True
             continue
 
+        # Check if record has all required fields
         if set(dictionary.keys()) != key_set:
             print(
                 f"Invalid format: {dictionary} at position {index} has missing and/or invalid keys."
@@ -42,15 +78,16 @@ def validate(data):
             is_invalid = True
             continue
 
+        # Find invalid fields in the record
         invalid_records = find_invalid_records(**dictionary)
         for key in invalid_records:
             print(f"Unexpected format '{key}: {dictionary[key]}' at position {index}.")
             is_invalid = True
-    
         if is_invalid:
             return False
         
-    print("Valid format.")
+    # All records are valid
+    print('Valid format.')
     return True
 
 def main():    
