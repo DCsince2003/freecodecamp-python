@@ -9,9 +9,9 @@ def pin_extractor(poem):
     Extract secret codes from poems using the length of the nth word
     in the nth line. If missing, use '0'.
     Args:
-    poem (str): The poem containing the secret codes
+        poem (str): The poem containing the secret codes
     Returns:
-    secret_code (str): The secret code extracted from the poem
+        secret_code (str): The secret code extracted from the poem
     """
 
     secret_code = ''
