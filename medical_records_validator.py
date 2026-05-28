@@ -79,10 +79,11 @@ def validate(data):
 
         # Find invalid fields in each record
         invalid_records = find_invalid_records(**dictionary)
-        for key in invalid_records:
-            print(f"Unexpected format '{key}: {dictionary[key]}' in patient record {index + 1}.")
+        if invalid_records:
+            for key in invalid_records:
+                print(f"Unexpected format '{key}: {dictionary[key]}' in patient record {index + 1}.")
             is_invalid = True
-        print()
+            print()
 
     if is_invalid:
         return False
