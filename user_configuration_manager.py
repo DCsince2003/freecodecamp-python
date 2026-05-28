@@ -80,7 +80,7 @@ def view_settings(Settings):
         # Build a clean, readable string with capitalized keys for presentation
         for key, value in Settings.items():
             formatted_settings += key.capitalize() + ': ' + value + '\n'
-        return f"Current System Settings:\n{formatted_settings}"
+        return f"\nCurrent System Settings:\n{formatted_settings}"
 
 def view_changes(Settings):
     """Prompt the user to view the updated configuration settings.
@@ -117,16 +117,32 @@ def main():
     ch = input("Select an option: ")
     match ch:
         case '1':
-            print(add_setting(test_settings, ('auto-rotate', 'on')),'\n')
+            print("Which setting do you wish to add?\n")
+            name = input("Setting name (e.g., theme): ")
+            value = input("Setting value (e.g., light or dark): ")
+            print(add_setting(test_settings, (name, value)),'\n')
             print(view_changes(test_settings))
+
         case '2':
-            print(update_setting(test_settings, ('theme', 'light')),'\n')
+            print(view_settings(test_settings))
+            print("Which setting do you wish to update?\n")
+            name = input("Setting name: ")
+            value = input("Setting Value: ")
+            print()
+            print(update_setting(test_settings, (name, value)),'\n')
             print(view_changes(test_settings))
+
         case '3':
-            print(delete_setting(test_settings, 'volume'),'\n')
+            print(view_settings(test_settings))
+            print("Which setting do you wish to delete?\n")
+            name = input("Setting name: ")
+            print()
+            print(delete_setting(test_settings, name),'\n')
             print(view_changes(test_settings))
+
         case '4':
-            print(view_settings(test_settings),'\n')
+            print(view_settings(test_settings))
+
         case _:
             print("Sorry, I can't help you with that.")
 
