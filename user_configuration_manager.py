@@ -1,9 +1,26 @@
-"""User Configuration Manager Project (freeCodeCamp)"""
+"""User Configuration Manager Project (freeCodeCamp)
+
+This project supports:
+ - Viewing Current Settings
+ - Updating System Configurations
+ - Deleting Outdated Settings
+ - User Choice and Input Validation
+"""
 
 def add_setting(Settings, new_setting):
+    """Add a new configuration setting to the system.
+    Args:
+        Settings (dict): The dictionary containing current system settings.
+        new_setting (tuple): The key-value pair to be added.
+    Returns:
+        str: Status message indicating the outcome of the addition attempt.
+    """
+
+    # Normalize input to prevent duplicate keys with different casing
     key = new_setting[0].lower()
     value = new_setting[1].lower()
 
+    # Check if the configuration key already exists to prevent duplication
     if key in Settings:
         return f"Setting '{key}' already exists! Cannot add a new setting with this name."
     else:
@@ -11,9 +28,18 @@ def add_setting(Settings, new_setting):
         return f"Setting '{key}' added with value '{value}' successfully!"
 
 def update_setting(Settings, updated_setting):
+    """Update an existing configuration setting in the system.
+    Args:
+        Settings (dict): The dictionary containing current system settings.
+        updated_setting (tuple): The key-value pair to be updated.
+    Returns:
+        str: Status message indicating the outcome of the update attempt.
+    """
+
     key = updated_setting[0].lower()
     value = updated_setting[1].lower()
 
+    # Verify the setting exists before attempting to modify it.
     if key in Settings:
         Settings[key] = value
         return f"Setting '{key}' updated to '{value}' successfully!"
@@ -21,8 +47,17 @@ def update_setting(Settings, updated_setting):
         return f"Setting '{key}' does not exist! Cannot update a non-existing setting."
 
 def delete_setting(Settings, key):
+    """Delete a configuration setting from the system.
+    Args:
+        Settings (dict): The dictionary containing current system settings.
+        key (str): The name of the setting to be deleted.
+    Returns:
+        str: Status message indicating the outcome of the delete attempt.
+    """
+
     key = key.lower()
 
+    # Verify the setting exists before attempting to delete it
     if key in Settings:
         del Settings[key]
         return f"Setting '{key}' deleted successfully!"
@@ -30,21 +65,39 @@ def delete_setting(Settings, key):
         return "Setting not found!"
 
 def view_settings(Settings):
+    """View the current system configuration settings.
+    Args:
+        Settings (dict): The dictionary containing current system settings.
+    Returns:
+        str: System settings in a presentable format.
+    """
+
+    # Return a fallback message if the dictionary is empty
     if not Settings:
         return "No settings available."
     else:
         formatted_settings = ''
+        # Build a clean, readable string with capitalized keys for presentation
         for key, value in Settings.items():
             formatted_settings += key.capitalize() + ': ' + value + '\n'
         return f"Current System Settings:\n{formatted_settings}"
 
 def view_changes(Settings):
+    """Prompt the user to view the updated configuration settings.
+    Args:
+        Settings (dict): The dictionary containing changed system settings.
+    Returns:
+        str: The formatted settings if requested, or a confirmation message otherwise.
+    """
+
     answer = input("Would you like to view your settings? (yes/no): ")
+    # Standardize input to handle case variations like "Yes" or "YES"
     if answer.lower() == 'yes':
         return view_settings(Settings) + '\n'
     elif answer.lower() == 'no':
         return "Alright!\n"
     else:
+        # handles invalid user inputs
         return "I'll take that as a no.\n"
 
 def main():
