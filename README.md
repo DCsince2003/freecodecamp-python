@@ -19,3 +19,10 @@ Built using modular functions to perform 🤴Caesar Cipher 🔐encryption and �
 3. [Pin Extractor Project](https://github.com/DCsince2003/freecodecamp-python/blob/main/pin_extractor.py) - 
 Built using modular functions to process text input and extract 🔢PIN-like patterns or keywords from 📜pre-defined and user-input poems. The project emphasizes 🧩string handling, 📋list manipulation, and structured function-based program design.
 ![pin-extractor-flowchart](/flowcharts/pin-extractor-flowchart.drawio.png)
+
+4. [Medical Record Validator](https://github.com/DCsince2003/freecodecamp-python/blob/main/medical_records_validator.py) - 
+A data-checking tool🧰 designed to scan medical🩺 records and instantly catch formatting errors or missing details🔍. It's a great showcase of practical programming skills, focusing on text validation ✍️, rule checking, and clear error reporting📋.
+![medical-records-validator-flowchart](/flowcharts/medical-records-validator-flowchart.drawio.png)
+
+5. [User Configuration Manager](https://github.com/DCsince2003/freecodecamp-python/blob/main/user_configuration_manager.py) - 
+A configuration manager⚙️ designed to view🔍, update🔄, and clean up🗑️ system settings instantly while ensuring data accuracy. It’s a great showcase of practical programming skills, focusing on user interaction👤 and robust input validation📋.
