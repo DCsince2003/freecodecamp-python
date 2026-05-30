@@ -93,7 +93,7 @@ def view_changes(Settings):
     answer = input("Would you like to view your settings? (yes/no): ")
     # Standardize input to handle case variations like "Yes" or "YES"
     if answer.lower() == 'yes':
-        return view_settings(Settings) + '\n'
+        return view_settings(Settings)
     elif answer.lower() == 'no':
         return "Alright!\n"
     else:
