@@ -26,3 +26,4 @@ A data-checking tool🧰 designed to scan medical🩺 records and instantly catc
 
 5. [User Configuration Manager](https://github.com/DCsince2003/freecodecamp-python/blob/main/user_configuration_manager.py) - 
 A configuration manager⚙️ designed to view🔍, update🔄, and clean up🗑️ system settings instantly while ensuring data accuracy. It’s a great showcase of practical programming skills, focusing on user interaction👤 and robust input validation📋.
+![user-configuration-manager-flowchart](/flowcharts/user-configuration-manager-flowchart.drawio.png)
